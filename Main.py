@@ -1,5 +1,6 @@
 # Example file showing a basic pygame "game loop"
 import pygame
+from PIL import Image
 # pygame setup
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
@@ -8,10 +9,15 @@ screen.blit(background, (0, 0))
 clock = pygame.time.Clock()
 running = True
 Monster = pygame.transform.scale(pygame.image.load("monster.png"),(100,100))
-Monster_Dancing = pygame.transform.scale(pygame.image.load("spaghetti_monster_dance.gif"),(100,100))
 x=400
 y=300
+frameCounter = 0
+
+frames = [pygame.image.load(f"frame_{i}.png").convert_alpha() for i in range(20)]
+prev_mouse_pos = pygame.mouse.get_pos()
 while running:
+    Mouse_moving = False
+    
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
@@ -26,13 +32,21 @@ while running:
                 y -= 10
             if event.key == pygame.K_DOWN:
                 y += 10
-        if event.type == pygame.MOUSEMOTION:
-            screen.blit(background, (0, 0))
-            screen.blit(Monster_Dancing, (x, y))
-        else:
-            screen.blit(background, (0, 0))
+    current_mouse_pos = pygame.mouse.get_pos()
+    Mouse_moving = current_mouse_pos != prev_mouse_pos
+    prev_mouse_pos = current_mouse_pos
+    frame = pygame.image.load("Monster.png").convert_alpha()
+    screen.blit(background, (0, 0))
+    screen.blit(frame, (x, y))
+  
+      
+    #if Mouse_moving:
+        #frameCounter = (frameCounter + 1) % 20
+        #frame = frames[frameCounter]
+     #screen.blit(frame, (x, y))
+     #print("Mouse is moving")
 
-            screen.blit(Monster, (x, y))
+        
     # fill the screen with a color to wipe away anything from last frame
 
     # RENDER YOUR GAME HERE
