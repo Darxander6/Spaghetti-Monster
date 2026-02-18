@@ -1,6 +1,5 @@
 # Example file showing a basic pygame "game loop"
 import pygame
-from PIL import Image
 # pygame setup
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
@@ -8,13 +7,17 @@ background = pygame.transform.scale(pygame.image.load("space.png"),(800,600))
 screen.blit(background, (0, 0))
 clock = pygame.time.Clock()
 running = True
-Monster = pygame.transform.scale(pygame.image.load("monster.png"),(100,100))
+Monster = pygame.transform.scale(pygame.image.load("frame_7.png"),(100,100))
 x=400
 y=300
 frameCounter = 0
-
-frames = [pygame.image.load(f"frame_{i}.png").convert_alpha() for i in range(20)]
 prev_mouse_pos = pygame.mouse.get_pos()
+Movingwidth = 200
+Movinghieght = 200
+hieght=100
+width=100
+movingx = x-50
+movingy = y-50
 while running:
     Mouse_moving = False
     
@@ -32,19 +35,43 @@ while running:
                 y -= 10
             if event.key == pygame.K_DOWN:
                 y += 10
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:  # Left mouse button
+                Movingwidth += 20
+                Movinghieght += 20
+                hieght += 10
+                width += 10
+                
+                movingy -= 5
+                movingx -= 5
+            elif event.button == 3:  # Right mouse button
+                Movingwidth -= 20
+                Movinghieght -= 20
+                hieght -= 10
+                width -= 10
+                
+                movingy += 5
+                movingx += 5
+       
+        
+    
     current_mouse_pos = pygame.mouse.get_pos()
     Mouse_moving = current_mouse_pos != prev_mouse_pos
     prev_mouse_pos = current_mouse_pos
-    frame = pygame.image.load("Monster.png").convert_alpha()
+    frame = pygame.image.load("frame_15.png").convert_alpha()
+    
     screen.blit(background, (0, 0))
-    screen.blit(frame, (x, y))
-  
-      
-    #if Mouse_moving:
-        #frameCounter = (frameCounter + 1) % 20
-        #frame = frames[frameCounter]
-     #screen.blit(frame, (x, y))
-     #print("Mouse is moving")
+    if Mouse_moving:
+        frameCounter = (frameCounter + 1) % 20
+        Monster = pygame.transform.scale(pygame.image.load(f"frame_{frameCounter}.png"),(Movingwidth,Movinghieght))
+        screen.blit(Monster, (movingx, movingy))
+    else:
+        Monster = pygame.transform.scale(pygame.image.load("Monster.png"),(width,hieght))
+        screen.blit(Monster, (x, y))
+
+
+
+
 
         
     # fill the screen with a color to wipe away anything from last frame
