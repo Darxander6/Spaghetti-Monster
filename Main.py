@@ -16,8 +16,8 @@ Movingwidth = 200
 Movinghieght = 200
 hieght=100
 width=100
-movingx = x-50
-movingy = y-50
+movingxadd = 0
+movingyadd = 0
 while running:
     Mouse_moving = False
     
@@ -42,16 +42,16 @@ while running:
                 hieght += 10
                 width += 10
                 
-                movingy -= 5
-                movingx -= 5
+                movingyadd -= 5
+                movingxadd -= 5
             elif event.button == 3:  # Right mouse button
                 Movingwidth -= 20
                 Movinghieght -= 20
                 hieght -= 10
                 width -= 10
                 
-                movingy += 5
-                movingx += 5
+                movingyadd += 5
+                movingxadd+= 5
        
         
     
@@ -64,7 +64,7 @@ while running:
     if Mouse_moving:
         frameCounter = (frameCounter + 1) % 20
         Monster = pygame.transform.scale(pygame.image.load(f"frame_{frameCounter}.png"),(Movingwidth,Movinghieght))
-        screen.blit(Monster, (movingx, movingy))
+        screen.blit(Monster, (x-50+movingxadd, y-50+movingyadd))
     else:
         Monster = pygame.transform.scale(pygame.image.load("Monster.png"),(width,hieght))
         screen.blit(Monster, (x, y))
