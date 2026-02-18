@@ -1,7 +1,7 @@
 # Spaghetti-Monster
-This little game where you make a spaghetti monster dance and move
-moving the cursor will make it dance
-to run:run the .exe file
+This little game where you make a spaghetti monster dance and move,
+moving the cursor will make it dance,
+to run:run the .exe file,
 Controls:
   up arrow:moves the monster up
   down arrow:moves the monster down
