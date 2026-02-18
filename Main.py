@@ -3,11 +3,11 @@ import pygame
 # pygame setup
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
-background = pygame.transform.scale(pygame.image.load("space.png"),(800,600))
+background = pygame.transform.scale(pygame.image.load("assets/space.png"),(800,600))
 screen.blit(background, (0, 0))
 clock = pygame.time.Clock()
 running = True
-Monster = pygame.transform.scale(pygame.image.load("frame_7.png"),(100,100))
+Monster = pygame.transform.scale(pygame.image.load("assets/Monster.png"),(100,100))
 x=400
 y=300
 frameCounter = 0
@@ -58,15 +58,14 @@ while running:
     current_mouse_pos = pygame.mouse.get_pos()
     Mouse_moving = current_mouse_pos != prev_mouse_pos
     prev_mouse_pos = current_mouse_pos
-    frame = pygame.image.load("frame_15.png").convert_alpha()
     
     screen.blit(background, (0, 0))
     if Mouse_moving:
         frameCounter = (frameCounter + 1) % 20
-        Monster = pygame.transform.scale(pygame.image.load(f"frame_{frameCounter}.png"),(Movingwidth,Movinghieght))
+        Monster = pygame.transform.scale(pygame.image.load(f"assets/frame_{frameCounter}.png"),(Movingwidth,Movinghieght))
         screen.blit(Monster, (x-50+movingxadd, y-50+movingyadd))
     else:
-        Monster = pygame.transform.scale(pygame.image.load("Monster.png"),(width,hieght))
+        Monster = pygame.transform.scale(pygame.image.load("assets/Monster.png"),(width,hieght))
         screen.blit(Monster, (x, y))
 
 
